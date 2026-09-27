@@ -2,31 +2,16 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sổ điểm danh lớp 12A6</title>
 </head>
 <body style="font-family:-apple-system,sans-serif;background:#0B0F14;color:#fff;padding:24px">
-<p id="st">Đang mở sổ điểm danh 12A6…</p>
+<p>Dang mo so diem danh 12A6...</p>
 <script>
-(async function(){
-  const urls=[
-    './index%20.html?v=27',
-    './part0.txt?v=27'
-  ];
-  let html=null;
-  for (const u of urls){
-    try{
-      const r=await fetch(u);
-      if(r.ok){
-        const t=await r.text();
-        if(t.includes('Sổ điểm danh') && t.includes('recordedBy')){ html=t; break; }
-        if(t.includes('Sổ điểm danh') && !html) html=t;
-      }
-    }catch(e){}
-  }
-  if(!html){ document.getElementById('st').textContent='Chưa tải được sổ. Tải lại trang.'; return; }
-  document.open(); document.write(html); document.close();
-})();
+fetch('https://raw.githubusercontent.com/khanhgf091/12a6/51cc6ecd403e2597487fffe9da01053c7c54e314/index%20.html')
+  .then(r=>r.text())
+  .then(t=>{ document.open(); document.write(t); document.close(); })
+  .catch(()=>{ location.href='https://khanhgf091.github.io/12a6/index%20.html'; });
 </script>
 </body>
 </html>
