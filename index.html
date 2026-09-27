@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=./index%20.html" />
-  <title>Sổ điểm danh lớp 12A6</title>
-  <script>location.replace("./index%20.html");</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sổ điểm danh lớp 12A6</title>
 </head>
 <body style="font-family:-apple-system,sans-serif;background:#0B0F14;color:#fff;padding:24px">
-  <p><a href="./index%20.html" style="color:#93c5fd">Mở sổ điểm danh 12A6</a></p>
+<p id="st">Đang mở sổ điểm danh 12A6…</p>
+<script>
+(async function(){
+  const urls=[
+    './index%20.html?v=27',
+    './part0.txt?v=27'
+  ];
+  let html=null;
+  for (const u of urls){
+    try{
+      const r=await fetch(u);
+      if(r.ok){
+        const t=await r.text();
+        if(t.includes('Sổ điểm danh') && t.includes('recordedBy')){ html=t; break; }
+        if(t.includes('Sổ điểm danh') && !html) html=t;
+      }
+    }catch(e){}
+  }
+  if(!html){ document.getElementById('st').textContent='Chưa tải được sổ. Tải lại trang.'; return; }
+  document.open(); document.write(html); document.close();
+})();
+</script>
 </body>
 </html>
